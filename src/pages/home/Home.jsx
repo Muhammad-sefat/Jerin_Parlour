@@ -1,7 +1,11 @@
+import { ScrollRestoration } from "react-router";
+import HomeBanner from "../../components/homeComponents/HomeBanner";
+
 const Home = () => {
   return (
     <>
-      <p>This is home page</p>
+      <ScrollRestoration />
+      <HomeBanner />
     </>
   );
 };
