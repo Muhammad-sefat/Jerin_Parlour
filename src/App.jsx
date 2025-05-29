@@ -4,11 +4,11 @@ import Footer from "./shared/Footer";
 
 function App() {
   return (
-    <>
+    <div>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 

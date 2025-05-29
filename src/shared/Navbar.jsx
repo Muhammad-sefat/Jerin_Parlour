@@ -1,6 +1,7 @@
-// src/components/Navbar.jsx
-import React, { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; // For hamburger icon, install react-icons
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,45 +11,33 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-pink-500 to-purple-600 p-4 shadow-md w-full">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-[#E5E5E5] p-4 shadow-md w-full fixed top-0 left-0 right-0 z-50">
+      <div className="flex justify-between items-center w-full px-6">
         {/* Logo */}
-        <div className="text-white text-2xl font-bold font-serif tracking-wide">
-          Jerin's Parlour
+        <div className="text-pink-600 font-bold font-serif tracking-wide">
+          <img className="w-26" src={logo} alt="logo" />
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6 items-center">
-          <a
-            href="#"
-            className="text-white hover:text-gray-200 transition duration-300"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="text-white hover:text-gray-200 transition duration-300"
-          >
-            Contact Us
-          </a>
-          <a
-            href="#"
-            className="text-white hover:text-gray-200 transition duration-300"
-          >
-            Our Portfolio
-          </a>
-          <a
-            href="#"
-            className="text-white hover:text-gray-200 transition duration-300"
-          >
-            Our Team
-          </a>
-          <a
-            href="#"
-            className="bg-white text-pink-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition duration-300 shadow"
-          >
-            Login
-          </a>
+          <Link to={"/"}>
+            <p className="text-black text-[15px]">Home</p>
+          </Link>
+          <Link to={"/portfolio"}>
+            <p className="text-black  text-[15px]"> Our Portfolio</p>
+          </Link>
+          <Link to={"/team"}>
+            <p className="text-black text-[15px]"> Our Team</p>
+          </Link>
+          <Link to={"/contact"}>
+            <p className="text-black text-[15px]">Contact Us</p>
+          </Link>
+
+          <Link to={"/login"}>
+            <p className="text-white px-5 py-2 white text-[15px] rounded-full font-semibold bg-pink-600 transition duration-300">
+              Login
+            </p>
+          </Link>
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}
@@ -68,7 +57,7 @@ const Navbar = () => {
           <a
             href="#"
             className="block text-white px-4 py-2 hover:bg-pink-700 transition duration-300 rounded"
-            onClick={toggleMenu} // Close menu on click
+            onClick={toggleMenu}
           >
             Home
           </a>
