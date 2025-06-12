@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="footer sm:footer-horizontal bg-[#f73d7b] text-base-content p-10 w-full fixed bottom-0">
+    <footer className="footer sm:footer-horizontal bg-[#f73d7b] text-base-content p-10 w-full">
       <aside>
         <p>
           H#000 (0th Floor), Road #00,

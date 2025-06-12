@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#E5E5E5] p-4 border-b w-full fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-[#FFF8F5] p-4 border-b w-full fixed top-0 z-50">
       <div className="flex justify-between items-center w-full px-16">
         {/* Logo */}
         <div className="text-[#f73d7b] font-bold font-serif tracking-wide">
@@ -23,24 +23,24 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link to={"/"}>
-            <p className="text-black text-[15px] hover:text-[#f73d7b] hover:font-medium">
+            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
               Home
             </p>
           </Link>
           <Link to={"/portfolio"}>
-            <p className="text-black  text-[15px] hover:text-[#f73d7b] hover:font-medium">
+            <p className="text-black  text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
               {" "}
               Our Portfolio
             </p>
           </Link>
           <Link to={"/team"}>
-            <p className="text-black text-[15px] hover:text-[#f73d7b] hover:font-medium">
+            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
               {" "}
               Our Team
             </p>
           </Link>
           <Link to={"/contact"}>
-            <p className="text-black text-[15px] hover:text-[#f73d7b] hover:font-medium">
+            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
               Contact Us
             </p>
           </Link>
