@@ -4,7 +4,7 @@ import Footer from "./shared/Footer";
 
 function App() {
   return (
-    <div>
+    <div className="w-screen ">
       <Navbar />
       <Outlet />
       <Footer />
