@@ -8,3 +8,14 @@
     @apply transform hover:scale-95 transition-all duration-300 ease-in-out;
   }
 }
+/* In your styles.css or global stylesheet */
+.mySwiper .swiper-pagination-bullet {
+  background-color: #d1d5db;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: #ff4d6d;
+  transform: scale(1.2);
+}
