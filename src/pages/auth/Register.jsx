@@ -1,11 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import logo from "../../assets/logo.png";
+import axiosPublic from "../api/authApi/Api";
+import { useAuth } from "../../provider/AuthContext";
 
 const Register = () => {
+  const { register, handleSubmit, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await axiosPublic.post("/users/register", data);
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      alert("User registered successfully ✅");
+      reset();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong ❌");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center p-4">
@@ -23,7 +43,7 @@ const Register = () => {
         </h2>
 
         {/* Form */}
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* Name */}
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Name
@@ -32,6 +52,7 @@ const Register = () => {
             <User className="text-gray-400 w-5 h-5" />
             <input
               type="text"
+              {...register("name", { required: true })}
               placeholder="Enter your name"
               className="w-full px-2 py-2 outline-none text-sm text-gray-700"
             />
@@ -45,6 +66,7 @@ const Register = () => {
             <Mail className="text-gray-400 w-5 h-5" />
             <input
               type="email"
+              {...register("email", { required: true })}
               placeholder="Enter your email"
               className="w-full px-2 py-2 outline-none text-sm text-gray-700"
             />
@@ -58,6 +80,7 @@ const Register = () => {
             <Lock className="text-gray-400 w-5 h-5" />
             <input
               type={showPassword ? "text" : "password"}
+              {...register("password", { required: true })}
               placeholder="Create a password"
               className="w-full px-2 py-2 outline-none text-sm text-gray-700"
             />

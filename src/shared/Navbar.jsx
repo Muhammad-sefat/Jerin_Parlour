@@ -2,9 +2,12 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router";
 import logo from "../assets/logo.png";
+import { useAuth } from "../provider/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const { user, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -45,11 +48,43 @@ const Navbar = () => {
             </p>
           </Link>
 
-          <Link to={"/login"}>
-            <button className="text-white px-5 py-2 white text-[15px] rounded-full font-semibold bg-[#f73d7b] sclhover">
-              Login
-            </button>
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <img
+                src={
+                  user.photo || "https://i.ibb.co/Z6XP9y6t/user-16782527.png"
+                }
+                alt="User"
+                className="w-12 h-12 rounded-full cursor-pointer border border-gray-300"
+                onClick={() => setOpenDropdown((prev) => !prev)}
+              />
+
+              {openDropdown && (
+                <div className="absolute right-3 top-18 bg-white border rounded-lg shadow-md w-36 z-50">
+                  <ul className="text-sm text-gray-700 font-medium">
+                    <li className="px-4 py-2 hover:bg-gray-100">
+                      <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100">
+                      <Link to="/profile">Profile</Link>
+                    </li>
+                    <li
+                      onClick={logout}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#f73d7b]"
+                    >
+                      Logout
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="text-white px-5 py-2 text-[15px] rounded-full font-semibold bg-[#f73d7b] hover:bg-[#e22c6b] transition">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}
