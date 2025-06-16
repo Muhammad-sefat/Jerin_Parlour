@@ -50,7 +50,7 @@ const Testimonials = () => {
       <Swiper
         pagination={{ dynamicBullets: true }}
         modules={[Pagination]}
-         className="mySwiper"
+        className="mySwiper"
         spaceBetween={20}
         breakpoints={{
           0: {
@@ -66,7 +66,7 @@ const Testimonials = () => {
       >
         {testimonials.map((item, idx) => (
           <SwiperSlide className="mb-12" key={idx}>
-            <div className="p-5 rounded bg-white shadow-md h-full">
+            <div className="p-5 rounded bg-white shadow-md h-full hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out">
               <div className="flex items-center gap-4 py-4">
                 <img
                   className="w-16 rounded-full"

@@ -1,10 +1,31 @@
 import { useState } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import axiosPublic from "../api/authApi/Api";
+import { useAuth } from "../../provider/AuthContext";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { register, handleSubmit, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const res = await axiosPublic.post("/users/login", data);
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      alert("Login successful ✅");
+      reset();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert(err?.response?.data?.message || "Login failed ❌");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center p-4">
@@ -22,7 +43,7 @@ const Login = () => {
         </h2>
 
         {/* Form */}
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Email
@@ -31,6 +52,7 @@ const Login = () => {
             <Mail className="text-gray-400 w-5 h-5" />
             <input
               type="email"
+              {...register("email", { required: true })}
               placeholder="Enter your email"
               className="w-full px-2 py-2 outline-none text-sm text-gray-700"
             />
@@ -44,6 +66,7 @@ const Login = () => {
             <Lock className="text-gray-400 w-5 h-5" />
             <input
               type={showPassword ? "text" : "password"}
+              {...register("password", { required: true })}
               placeholder="Enter your password"
               className="w-full px-2 py-2 outline-none text-sm text-gray-700"
             />
