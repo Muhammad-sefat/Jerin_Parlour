@@ -9,11 +9,13 @@ import { useAuth } from "../../provider/AuthContext";
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const res = await axiosPublic.post("/users/register", data);
       setUser(res.data);
@@ -24,6 +26,7 @@ const Register = () => {
     } catch (err) {
       console.error(err);
       alert("Something went wrong ❌");
+      setLoading(false);
     }
   };
 
@@ -117,14 +120,14 @@ const Register = () => {
           {/* Register Button */}
           <button
             type="submit"
-            disabled={!agreed}
+            disabled={!agreed && loading}
             className={`w-full ${
               agreed
                 ? "bg-[#f73d7b] hover:bg-[#e42b6b]"
                 : "bg-gray-300 cursor-not-allowed"
             } text-white py-2 rounded-lg text-sm font-semibold transition duration-300 shadow`}
           >
-            Register
+            {loading ? "Registering..." : "Register"}
           </button>
 
           {/* Login Redirect */}

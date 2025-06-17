@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
 import { useAuth } from "../provider/AuthContext";
 
@@ -25,28 +25,47 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to={"/"}>
-            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
-              Home
-            </p>
-          </Link>
-          <Link to={"/portfolio"}>
-            <p className="text-black  text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
-              {" "}
-              Our Portfolio
-            </p>
-          </Link>
-          <Link to={"/team"}>
-            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
-              {" "}
-              Our Team
-            </p>
-          </Link>
-          <Link to={"/contact"}>
-            <p className="text-black text-[15px] font-medium hover:text-[#f73d7b] hover:font-semibold transition">
-              Contact Us
-            </p>
-          </Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `text-[15px] font-semibold transition hover:text-[#f73d7b] hover:font-semibold ${
+                isActive ? "text-[#f73d7b] font-bold" : "text-black"
+              }`
+            }
+          >
+            Home
+          </NavLink>
+
+          <NavLink
+            to={"/portfolio"}
+            className={({ isActive }) =>
+              `text-[15px] font-semibold transition hover:text-[#f73d7b] hover:font-semibold ${
+                isActive ? "text-[#f73d7b] font-bold" : "text-black"
+              }`
+            }
+          >
+            Our Portfolio
+          </NavLink>
+          <NavLink
+            to={"/team"}
+            className={({ isActive }) =>
+              `text-[15px] font-semibold transition hover:text-[#f73d7b] hover:font-semibold ${
+                isActive ? "text-[#f73d7b] font-bold" : "text-black"
+              }`
+            }
+          >
+            Our Team
+          </NavLink>
+          <NavLink
+            to={"/contact"}
+            className={({ isActive }) =>
+              `text-[15px] font-semibold transition hover:text-[#f73d7b] hover:font-semibold ${
+                isActive ? "text-[#f73d7b] font-bold" : "text-black"
+              }`
+            }
+          >
+            Contact Us
+          </NavLink>
 
           {user ? (
             <div className="flex items-center gap-3">

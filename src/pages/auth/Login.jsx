@@ -4,16 +4,17 @@ import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router";
 import axiosPublic from "../api/authApi/Api";
 import { useAuth } from "../../provider/AuthContext";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setLoading(true);
     try {
       const res = await axiosPublic.post("/users/login", data);
       setUser(res.data);
@@ -22,7 +23,7 @@ const Login = () => {
       reset();
       navigate("/");
     } catch (err) {
-      console.error(err);
+      setLoading(false);
       alert(err?.response?.data?.message || "Login failed ❌");
     }
   };
@@ -54,7 +55,7 @@ const Login = () => {
               type="email"
               {...register("email", { required: true })}
               placeholder="Enter your email"
-              className="w-full px-2 py-2 outline-none text-sm text-gray-700"
+              className="w-full px-2 py-2 outline-none text-sm text-black"
             />
           </div>
 
@@ -86,9 +87,10 @@ const Login = () => {
           {/* Login Button */}
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-[#f73d7b] hover:bg-[#e42b6b] text-white py-2 rounded-lg text-sm font-semibold transition duration-300 shadow"
           >
-            Login
+            {loading ? "Loging..." : "Login"}
           </button>
 
           {/* Google Login */}
