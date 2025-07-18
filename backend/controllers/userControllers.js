@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const generateToken = require("../utils/generatetoken");
 
 const registerUser = async (req, res, next) => {
   try {
@@ -33,7 +34,6 @@ const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
-    console.log(existingUser);
     if (!existingUser)
       return res.status(404).json({ message: "User not found" });
 
@@ -48,6 +48,7 @@ const loginUser = async (req, res, next) => {
       _id: existingUser._id,
       name: existingUser.name,
       email: existingUser.email,
+      token: generateToken(existingUser._id),
     });
   } catch (error) {
     next(error);

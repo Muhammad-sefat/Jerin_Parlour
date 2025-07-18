@@ -57,7 +57,7 @@ const Register = () => {
               type="text"
               {...register("name", { required: true })}
               placeholder="Enter your name"
-              className="w-full px-2 py-2 outline-none text-sm text-gray-700"
+              className="w-full px-2 py-2 outline-none text-sm text-black bg-white"
             />
           </div>
 
@@ -71,7 +71,7 @@ const Register = () => {
               type="email"
               {...register("email", { required: true })}
               placeholder="Enter your email"
-              className="w-full px-2 py-2 outline-none text-sm text-gray-700"
+              className="w-full px-2 py-2 outline-none text-sm text-black bg-white"
             />
           </div>
 
@@ -85,7 +85,7 @@ const Register = () => {
               type={showPassword ? "text" : "password"}
               {...register("password", { required: true })}
               placeholder="Create a password"
-              className="w-full px-2 py-2 outline-none text-sm text-gray-700"
+              className="w-full px-2 py-2 outline-none text-sm text-black bg-white"
             />
             <button
               type="button"
@@ -107,7 +107,7 @@ const Register = () => {
               id="terms"
               checked={agreed}
               onChange={() => setAgreed(!agreed)}
-              className="mt-1"
+              className="mt-1 w-6   "
             />
             <label htmlFor="terms">
               I agree to the{" "}
@@ -121,7 +121,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={!agreed && loading}
-            className={`w-full ${
+            className={`w-full cursor-pointer ${
               agreed
                 ? "bg-[#f73d7b] hover:bg-[#e42b6b]"
                 : "bg-gray-300 cursor-not-allowed"

@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router";
 import axiosPublic from "../api/authApi/Api";
 import { useAuth } from "../../provider/AuthContext";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -55,7 +55,7 @@ const Login = () => {
               type="email"
               {...register("email", { required: true })}
               placeholder="Enter your email"
-              className="w-full px-2 py-2 outline-none text-sm text-black"
+              className="w-full px-2 py-2 outline-none text-sm text-black bg-white"
             />
           </div>
 
@@ -69,7 +69,7 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               {...register("password", { required: true })}
               placeholder="Enter your password"
-              className="w-full px-2 py-2 outline-none text-sm text-gray-700"
+              className="w-full px-2 py-2 outline-none text-sm text-black bg-white"
             />
             <button
               type="button"
